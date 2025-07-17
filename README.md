@@ -1,4 +1,4 @@
-# Survey Info - AutoCAD LISP Survey Drilling Tool
+# survey-info
 
 A specialized AutoCAD LISP routine for generating survey drilling markers (palitos de sondagem) with data imported from CSV files.
 
@@ -44,7 +44,7 @@ The CSV file should contain the following columns (semicolon-separated):
 
 Example:
 ```
-ID Sondagem;Cota de boca;Profundidade máxima;Projeção;NA
+ID Sondagem;Cota de boca;Profundidade mÃ¡xima;ProjeÃ§Ã£o;NA
 SP-9093;745,87;54,45;1;8
 SP-9094;716,25;60;2;7
 ```
@@ -56,7 +56,7 @@ SP-9094;716,25;60;2;7
 
 ## Author
 
-André Buchmann Müller
+AndrÃ© Buchmann MÃ¼ller
 
 ## License
 
