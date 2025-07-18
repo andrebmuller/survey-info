@@ -56,7 +56,7 @@ SP-9094;716,25;60;2;7
 
 ## Author
 
-André Buchmann Müller
+[André Buchmann Müller](https://andrebmuller.notion.site/abm-eng)
 
 ## License
 
