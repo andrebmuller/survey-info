@@ -1,58 +1,86 @@
 # survey-info
 
-A specialized AutoCAD LISP routine for generating survey drilling markers (palitos de sondagem) with data imported from CSV files.
+An AutoLISP utility for automatically generating survey stake drawings in AutoCAD from CSV drilling data files.
 
-## Description
+## Overview
 
-This tool creates standardized survey drilling markers in AutoCAD drawings by reading survey data from a CSV file. It generates visual representations of drilling information including depth markers, water level indicators, and project details.
+This tool converts geotechnical drilling data from CSV files into survey stake drawings in AutoCAD. It processes SPT (Standard Penetration Test) values and creates detailed technical drawings with information banners, water level indicators, and properly scaled geometric elements.
 
 ## Features
 
-- **CSV Data Import**: Reads survey data from `sondagens.csv` file
-- **Automated Drawing Generation**: Creates standardized drilling markers with flags and depth indicators
-- **Water Level Indicators**: Displays groundwater level (N.A.) markers
-- **Layer Management**: Automatically creates and manages drawing layers
-- **Optimized Performance**: Efficient point calculations and drawing operations
+- **Automatic CSV Processing**: Reads single survey data from CSV files with validation
+- **Interactive File Selection**: Choose CSV files through standard Windows dialog
+- **Complete Survey Stakes**: Creates information banner, water level indicators, SPT markings, and scaled frame
+- **Brazilian Format Support**: Handles decimal comma format and local standards
 
 ## Requirements
 
-- AutoCAD (any version supporting AutoLISP)
-- CSV file named `sondagens.csv` in the drawing directory
+- AutoCAD 2018+ (recommended)
+- AutoLISP support enabled
+- CSV files with 8 columns (see CSV File Structure)
 
 ## Installation
 
-1. Copy `survey-info.lsp` to your AutoCAD support folder
-2. Load the LISP file in AutoCAD using `APPLOAD` command
-3. Place your `sondagens.csv` file in the same directory as your drawing
+1. Copy `survey-info.lsp` to your AutoCAD support directory
+2. Load using APPLOAD or add to startup
+3. Restart AutoCAD
 
 ## Usage
 
-1. Type `SONDM` in the AutoCAD command line
-2. Enter the survey name when prompted
-3. Click the insertion point in your drawing
-4. The tool will automatically generate the survey marker
+1. Run the command: `SONDMETRO`
+2. Select CSV file when prompted
+3. Click insertion point for the survey stake
+4. Complete survey stake is generated automatically
 
-## CSV File Format
+## CSV File Structure
 
-The CSV file should contain the following columns (semicolon-separated):
-- Survey ID
-- Surface elevation
-- Maximum depth
-- Projection
-- Water level depth
-- Additional fields as needed
+| Column | Field | Description | Example |
+|--------|--------|-------------|---------|
+| **A** | Survey ID | Survey identification code | `SP-9012` |
+| **B** | Mouth Elevation | Initial elevation | `733,33` |
+| **C** | Maximum Depth | Total depth in meters | `25,25` |
+| **D** | Projection | Projection value | `1,25` |
+| **E** | Water Level (N.A.) | Water level depth | `2,00` |
+| **F** | Initial Depth | Interval start depth | `0,00` |
+| **G** | Final Depth | Interval end depth | `1,00` |
+| **H** | SPT Value | SPT value or "-" | `7,00` |
 
-Example:
+### Example CSV
+```csv
+ID Sondagem;Cota de boca;Profundidade máxima;Projeção;NA;Profundidade inicial;Profundidade final;SPT
+SP-9012;733,33;25,25;1,25;2,00;0,00;1,00;-
+;;;;;1,00;2,00;7,00
+;;;;;2,00;3,00;9,00
 ```
-ID Sondagem;Cota de boca;Profundidade máxima;Projeção;NA
-SP-9093;745,87;54,45;1;8
-SP-9094;716,25;60;2;7
-```
+
+## Layer Organization
+
+| Layer Name | Color | Content |
+|------------|-------|---------|
+| `msp-ge_perfil` | **Green (3)** | Geometric elements, frame, lines |
+| `msp-ge_textos` | **Yellow (2)** | Text annotations and labels |
+| `msp-ge_NA` | **Red (1)** | Water level indicators |
+
+## Error Handling
+
+| Error | Solution |
+|-------|----------|
+| "Estrutura inválida" | Check semicolon separators |
+| "Profundidade inválida" | Correct depth value in column C |
+| "Arquivo não encontrado" | Verify CSV file location |
+| Nothing appears | Execute `ZOOM EXTENTS` |
+
+## Notes
+
+- CSV files must use semicolon (;) as separator
+- Decimal values use comma (,) format
+- Scale factor: 2.5 units per meter depth
+- Environment settings are automatically preserved
 
 ## Version History
 
-- **v1.4.0**: Current optimized version with improved performance
-- Previous versions available in `/old` directory
+- **v1.6.0** - Current version, single survey per CSV file
+- **v1.0.0** - Initial version with basic functionality
 
 ## Author
 
@@ -60,4 +88,4 @@ SP-9094;716,25;60;2;7
 
 ## License
 
-See LICENSE.md file for licensing information.
+MIT License - See LICENSE.md for details
