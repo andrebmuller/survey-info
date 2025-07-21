@@ -2,7 +2,7 @@
 ; survey-info
 ;==============================================================================
 ; Criação de palitos de sondagem no AutoCAD com dados extraídos de CSV
-; Autor: André Buchmann Müller
+; Autor: andrebmuller
 ; Versão: 1.6.0
 ;==============================================================================
 ; ESTRUTURA DO CSV ESPERADA:
